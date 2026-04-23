@@ -16,15 +16,26 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.devjunior.controlecontas",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
+      "permissions": ["NOTIFICATIONS"],
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-sqlite",
+      "@react-native-community/datetimepicker"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "89cd4457-1a2c-424d-b9ff-16933daced73"
+      }
     }
   }
 }

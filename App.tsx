@@ -1,20 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { initializeDatabase } from './src/database/initializeDatabase';
+
+import Home from './src/screens/Home';
+import CadastroConta from './src/screens/CadastroConta';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
+  useEffect(() => {
+    // Inicializa o banco e as permissões de notificação logo ao abrir
+    initializeDatabase();
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen 
+          name="Home" 
+          component={Home} 
+          options={{ title: 'Minhas Contas' }} 
+        />
+        <Stack.Screen 
+          name="Cadastro" 
+          component={CadastroConta} 
+          options={{ title: 'Nova Conta' }} 
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
