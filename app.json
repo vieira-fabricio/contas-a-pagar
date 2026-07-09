@@ -21,7 +21,12 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "permissions": ["NOTIFICATIONS"],
+      "permissions": [
+        "POST_NOTIFICATIONS",
+        "INTERNET",
+        "SCHEDULE_EXACT_ALARM",
+        "RECEIVE_BOOT_COMPLETED"
+      ],
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },
@@ -30,7 +35,15 @@
     },
     "plugins": [
       "expo-sqlite",
-      "@react-native-community/datetimepicker"
+      "@react-native-community/datetimepicker",
+      //[
+      //  "@sentry/react-native/expo",
+      //  {
+      //    "url": "https://sentry.io/",
+      //    "project": "react-native",
+      //    "organization": "diariodev"
+      //  }
+      //]
     ],
     "extra": {
       "eas": {

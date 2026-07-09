@@ -1,4 +1,23 @@
 import * as Notifications from 'expo-notifications';
+import { Platform } from 'react-native';
+
+export async function registerForPushNotificationsAsync() {
+  if (Platform.OS === 'android') {
+    await Notifications.setNotificationChannelAsync('default', {
+      name: 'Avisos de Contas',
+      importance: Notifications.AndroidImportance.MAX,
+      vibrationPattern: [0, 250, 250, 250],
+      lightColor: '#FF231F7C',
+    });
+  }
+
+  const { status } = await Notifications.requestPermissionsAsync();
+    if (status !== 'granted') {
+      console.log('Permissão negada!');
+       false;
+    }
+    return true;
+  }
 
 
 export async function scheduleBillNotification(titulo, dataVencimento) {

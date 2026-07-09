@@ -50,9 +50,42 @@ export default function Home({ navigation }) {
   };
 
   const marcarComoPaga = async (id) => {
-    const db = await SQLite.openDatabaseAsync('financeiro.db');
-    await db.runAsync('UPDATE contas SET pago = 1 WHERE id = ?', [id]);
-    carregarContas();
+    Alert.alert(
+      'Confirmar pagamento',
+      'Deseja realmente marcar esta conta como paga?',
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+        {
+          text: 'Confirmar',
+
+          onPress: async () => {
+            try {
+              const db = await SQLite.openDatabaseAsync('financeiro.db');
+
+              await db.runAsync(
+                'UPDATE contas SET pago = 1 WHERE id = ?',
+                [id]
+              );
+              carregarContas();
+              Alert.alert(
+                'Sucesso',
+                'Conta marcada como paga.'
+              );
+            } catch (error) {
+              console.error(error);
+
+              Alert.alert(
+                'Erro',
+                'Não foi possível atualizar a conta.'
+              );
+            }
+          },
+        },
+      ]
+    );
   };
 
   const renderItem = ({ item }) => (
@@ -83,6 +116,7 @@ export default function Home({ navigation }) {
         <Ionicons name="add" size={32} color="#fff" />
       </TouchableOpacity>
     </View>
+
   );
 }
 
